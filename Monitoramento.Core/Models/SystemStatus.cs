@@ -8,7 +8,7 @@ namespace Monitoramento.Core.Models
     {
         public string SystemName { get; set; } = string.Empty;
         public bool IsOnline { get; set; }
-        public int ResponseMs { get; set; }
+        public int ResponseTimeMs { get; set; }
         public DateTime CheckedAt { get; set; }
         public string? ErrorMessage { get; set; }
     }

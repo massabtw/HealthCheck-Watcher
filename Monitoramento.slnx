@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="Monitoramente.Functions/Monitoramente.Functions.csproj" Id="55f087c2-1a54-48bc-a07a-a6fd64e7f112" />
   <Project Path="Monitoramento.Core/Monitoramento.Core.csproj" />
+  <Project Path="Monitoramento.Infrastructure/Monitoramento.Infrastructure.csproj" />
 </Solution>
