@@ -7,41 +7,8 @@ using Monitoramento.Core.Models;
 
 namespace Monitoramento.Infrastructure.APIs
 {
-    public class PdvHealthChecker : IHealthChecker
+    public class PdvHealthChecker(HttpClient httpClient) : EquipamentoBase(httpClient, "https://httpstat.us/404", "SistemPDV")
     {
-        private readonly HttpClient _httpclient;
-
-        public PdvHealthChecker(HttpClient httpClient)
-        {
-            _httpclient = httpClient;
-        }
-
-        public string SystemName { get; } = "SistemaPDV";
-
-        public async Task<SystemStatus> CheckHealthAsync()
-        {
-            try
-            {
-                var resposta = await _httpclient.GetAsync("https://httpstat.us/404");
-                return new SystemStatus
-                {
-                    IsOnline = resposta.IsSuccessStatusCode,
-                    SystemName = "SistemaPDV"
-                };
-            }
-            catch(Exception ex)
-            {
-                return new SystemStatus 
-                {
-                    ErrorMessage = "Conexão recusada",
-                    SystemName = "SistemaPDV",
-                    IsOnline = false
-                
-                };
-
-            }
-
-        }
 
     }
 }
