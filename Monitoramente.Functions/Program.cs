@@ -12,6 +12,7 @@ builder.ConfigureFunctionsWebApplication();
 builder.Services
     .AddApplicationInsightsTelemetryWorkerService()
     .ConfigureFunctionsApplicationInsights();
+builder.Services.AddHttpClient();
 builder.Services.AddTransient<IHealthChecker, TotemHealthChecker>();
 builder.Services.AddTransient<IHealthChecker, PdvHealthChecker>();
 builder.Build().Run();

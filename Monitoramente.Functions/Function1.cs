@@ -1,4 +1,5 @@
 using System;
+using System.IO.Enumeration;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Monitoramento.Core.Interfaces;
@@ -18,9 +19,14 @@ public class Function1
     }
 
     [Function("Function1")]
-    public void Run([TimerTrigger("0 */2 * * * *")] TimerInfo myTimer)
+    public async Task Run([TimerTrigger("0 */2 * * * *")] TimerInfo myTimer)
     {
         _logger.LogInformation("C# Timer trigger function executed at: {executionTime}", DateTime.Now);
+        foreach(var fiscal in _healthCheckers)
+        {
+            var relatorio = await fiscal.CheckHealthAsync();
+            _logger.LogInformation($"Equipamento:{relatorio.SystemName} - Status Online: {relatorio.IsOnline}");
+        }
         
         if (myTimer.ScheduleStatus is not null)
         {
